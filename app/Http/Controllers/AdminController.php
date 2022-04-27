@@ -142,7 +142,7 @@ class AdminController extends Controller
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'phone' => 'required',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$request->update_id,
             'position' => 'required',
             'state' => 'required',
             'city' => 'required',
