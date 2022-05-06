@@ -13,14 +13,14 @@
                 <div class="form_div_home">
                     <h3>Position details</h3>
 
-                    <div class="form_div w-100 selection" id="change">
-                       <form action="{{ route('uploadDocumentsave') }}" method="POST" enctype="multipart/form-data" id="uploadDocument">
+                    <div class="form_div w-100 selection">
+                       <form action="{{ route('uploadDocumentsave') }}" method="POST" enctype="multipart/form-data">
                            @csrf
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label for="position" class="">Position</label>
                                     <select id="position" class="form-control" name="position">
-                                        <option disabled selected >Choose...</option>
+                                        <option selected>Choose...</option>
                                         <option value="position">position</option>
                                     </select>
                                     @error('position')
@@ -34,7 +34,7 @@
                                 <div class="form-group col-6">
                                     <label for="provincia" class="">Provinicia</label>
                                     <select id="provincia" class="form-control" name="provincia">
-                                        <option disabled selected >Choose...</option>
+                                        <option selected>Choose...</option>
                                         <option value="provincia">provincia</option>
                                     </select>
                                     @error('provincia')
@@ -46,7 +46,7 @@
                                 <div class="form-group col-6">
                                     <label for="canton" class="">Canton</label>
                                     <select id="canton" class="form-control" name="canton">
-                                        <option disabled selected >Choose...</option>
+                                        <option selected>Choose...</option>
                                         <option value="provincia">provincia</option>
                                     </select>
                                     @error('canton')
@@ -60,7 +60,7 @@
                                 <div class="form-group col-6">
                                     <label for="parroquia" class="">Parroquia</label>
                                     <select id="parroquia" class="form-control" name="parroquia">
-                                        <option disabled selected >Choose...</option>
+                                        <option selected>Choose...</option>
                                         <option value="parroquia">provincia</option>
                                     </select>
                                     @error('parroquia')
@@ -72,7 +72,7 @@
                                 <div class="form-group col-6">
                                     <label for="circun" class="">Circunscripcion</label>
                                     <select id="circun" class="form-control" name="circun">
-                                        <option disabled selected >Choose...</option>
+                                        <option selected>Choose...</option>
                                         <option value="circun">Circun</option>
                                     </select>
                                     @error('circun')
@@ -85,8 +85,8 @@
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="zona" class="">Zona</label>
-                                    <select  id="zona" class="form-control" name="zona">
-                                        <option selected  disabled>Choose...</option>
+                                    <select id="zona" class="form-control" name="zona">
+                                        <option selected>Choose...</option>
                                         <option value="zona">Zona</option>
 
                                     </select>
@@ -98,8 +98,8 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="junta_no" class="">Junta No.</label>
-                                    <select  id="junta_no" class="form-control" name="junta_no">
-                                        <option selected disabled>Choose...</option>
+                                    <select id="junta_no" class="form-control" name="junta_no">
+                                        <option selected>Choose...</option>
                                         <option value="junta_no">Junta No</option>
                                     </select>
                                     @error('junta_no')
@@ -115,7 +115,7 @@
                 <div class="form_div_home mt-5">
                     <div class="d-flex justify-content-between w-100 align-items-center">
                         <h3>Votes</h3>
-                        <p class="total_votes_count" >Total Votes: <span id="total_voters" ></span></p>
+                        <p class="total_votes_count">Total Votes: 00</p>
                     </div>
 
 
@@ -156,19 +156,36 @@
                                 <thead class="table_head">
                                     <tr>
                                         <th scope="col" class="col-1">Sr.</th>
-                                        <th scope="col" class="col-8">Candidate name</th>
-                                        <th scope="col" class="col-3">Votes</th>
+                                        <th scope="col" class="col-10">Candidate name</th>
+                                        <th scope="col" class="col-1">Votes</th>
                                     </tr>
                                 </thead>
-                                <tbody id="allCandidates">
-                                   
-                                   
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="row_first">1</th>
+                                        <td>
+                                            <select id="inputState" class="form-control border-0">
+                                                <option selected>Choose...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
+                                        </td>
+                                        <td>128</td>
+                                    </tr>
                                     <tr>
                                         <th scope="row" class="row_first">2</th>
                                         <td>
-                                          Name
+                                            <select id="inputState" class="form-control border-0">
+                                                <option selected>Choose...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
                                         </td>
-                                        <td><input class="form-control" type="text"></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -301,94 +318,33 @@
 @endsection('content')
 
 @section('javascript')
-
+<script src="js/dropzone.js"></script>
         <script >
+            $(document).ready(()=>{
 
-// $(document).ready(function() {
-// // $("#uploadDocument").validate();
-
-
-// $("#uploadDocument").validate({
-//     rules: {
-//       position : {
-//         required: true,
-//       },
-//       circun: {
-//         required: true,
-//       },
-//     },
-//     messages : {
-//       position: {
-//         required: "Select Position"
-//       },
-//       circun: {
-//         required: "Select Circun",
-//       },
-     
-//     }
-//   });
-
-// });
+                $(".btn-success").click(function(){ 
+                    var lsthmtl = $(".clone").html();
+                    $(".increment").after(lsthmtl);
+                });
+                $("body").on("click",".btn-danger",function(){ 
+                    $(this).parents(".hdtuto").remove();
+                });
 
 
-$(document).ready(function(){
-
-    $('#change').click(function(e) {  
-        var position = $('#position');
-        var provincia = $('#provincia');
-        var parroquia = $('#parroquia');
-        var canton = $('#canton');
-        var circun = $('#circun');
-        var junta_no = $('#junta_no');
-        var zona = $('#zona');
-       
-
-
-            if (position.val() == null || provincia.val() == null || parroquia.val() == null || canton.val() == null || circun.val() == null || junta_no.val() == null) {
-                console.log("select value")
-            }else{
-                // console.log(position.val())
-                // console.log(provincia.val())
-                // console.log(parroquia.val())
-                // console.log(canton.val())
-                // console.log(circun.val())
-                // console.log(junta_no.val())
-                // console.log(zona.val())
-             
-
-                
-
-
-
-
-                $.ajax({
-                type: "POST",
-                url: "{{ route('getElectionCandidate')}}",
-                data: {position:position.val(),parroquia:parroquia.val(),canton:canton.val(),circun:circun.val(),junta_no:junta_no.val(),zona:zona.val(),provincia:provincia.val()},
-                success: function(msg) {
-                    // var msg = $.parseJSON(msg);
-                    console.log(msg)
-
-                    $('#total_voters').text(msg.voters);
-                    $('#allCandidates').html(msg.candidates_name)
-                   
-                }
+            $('.Drag_drop_file').click(()=>{
+                // alert(2323);
+                $('.Drag_drop_file > input#Drag_drop_field').click();
             });
-
-
-
-            }
-});
-});  
+            });
         </script>
 
 
 
-<!-- <script>
+<script>
     $(function(){
     $('.selection').click(function(){
     var count = 0;
-
+    alert(here)
 
     $('select').each(function(){
       
@@ -403,5 +359,5 @@ $(document).ready(function(){
   })
   
 })
-</script> -->
+</script>
 @endsection('javascript')

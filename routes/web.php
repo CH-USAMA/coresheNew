@@ -24,6 +24,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // staff
 Route::get('/uploadDocument', [App\Http\Controllers\StaffController::class, 'uploadDocument'])->name('uploadDocument');
+Route::get('/editDocument/{id}', [App\Http\Controllers\DocumentController::class, 'editDocument'])->name('editDocument');
+
+Route::post('/uploadDocument', [App\Http\Controllers\DocumentController::class, 'uploadDocumentsave'])->name('uploadDocumentsave');
+
 
 
 
@@ -42,6 +46,9 @@ Route::post('/deleteCandidate', [App\Http\Controllers\AdminController::class, 'd
 
 
 Route::post('/getCandidate', [App\Http\Controllers\AdminController::class, 'getCandidate'])->name('getCandidate');
+
+Route::post('/getElectionCandidate', [App\Http\Controllers\AdminController::class, 'getElectionCandidate'])->name('getElectionCandidate');
+
 
 
 
@@ -86,3 +93,9 @@ Route::get('logout', function ()
 
     return Redirect::to('/');
 })->name('logoutCustom');
+
+
+
+Route::resource('gallery',App\Http\Controllers\GalleryController::class)->middleware('auth');
+Route::get('getimages',[App\Http\Controllers\GalleryController::class,'getImages']);
+Route::post('image/delete',[App\Http\Controllers\GalleryController::class,'destroy']); 

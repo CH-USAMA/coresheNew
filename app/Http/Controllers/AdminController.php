@@ -190,5 +190,37 @@ class AdminController extends Controller
         User::where('id',$request->delete_id)->delete();
         return response()->json(['success'=>'Candidate is Deleted Successfully']);
     }
+
+    
+    public function getElectionCandidate(Request $request) 
+    {
+        $matchThese = ['provincia' => 'provin', 'canton' => 'canto','parroquia' => 'parroquia','circun' => 'circun','zona' => 'zona','junta_no' => 'junta' ];
+        $results = ElectionDetails::where($matchThese)->get()->first();
+        // dd($results->voters);
+        $matchCandidate = ['state' => 'state', 'position' => 'position','parroquia' => 'parroquia','city' => 'city' ];
+        $resultCandi = User::where($matchCandidate)->get();
+       
+        $all_candi = '';
+        $i=0;
+        foreach($resultCandi as $res)
+        {
+            $i++;
+            $all_candi .= ' <tr>
+            <th scope="row" class="row_first">'.$i.'</th>
+            <td>
+               '.$res->name.'
+            </td>
+            <td><input type="text" class="form-control" name="candidate_'.$i.'"  id="candidate_'.$i.'"></input></td>
+        </tr>';
+        }
+       
+    // dd($all_candi);
+        return response()->json([
+            'total_voters'=> $results->voters,
+            'candidates_name'=>$all_candi
+        ]);
+    }
+
+    
   
 }

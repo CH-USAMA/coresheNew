@@ -21,48 +21,19 @@
               </tr>
             </thead>
             <tbody>
+              @foreach($docs as $doc)
               <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
+                <th scope="row"><a href="" class="election_link">{{ $doc->doc_name }}</a></th>
                 <td><span class="badge badge-pill success_badge">Valid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
+                <td>{{ date("g:i a", strtotime($doc->doc_start_time))  }}</td>
+                <td>{{ $doc->created_at->format('Y-m-d')  }}</td>
+                <td class="d-flex">
+                  <a href="{{ route('editDocument',['id' => Crypt::encrypt($doc->id)])}}" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a>
+                <a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a>
+              </td>
               </tr>
-              <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
-                <td><span class="badge badge-pill danger_badge">Invalid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
-              </tr>
-              <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
-                <td><span class="badge badge-pill success_badge">Valid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
-              </tr>
-              <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
-                <td><span class="badge badge-pill danger_badge">Invalid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
-              </tr>
-              <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
-                <td><span class="badge badge-pill success_badge">Valid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
-              </tr>
-              <tr>
-                <th scope="row"><a href="" class="election_link">Election document no 123</a></th>
-                <td><span class="badge badge-pill danger_badge">Invalid</span></td>
-                <td>6:30 pm</td>
-                <td>16-01-2022</td>
-                <td class="d-flex"><a href="#" class="mr-2 text-dark"><i class="fa fal fa-edit"></i></a><a href="#" class="ml-2 text-dark" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa far fa-trash-alt"></i></a></td>
-              </tr>
+              @endforeach
+             
             </tbody>
           </table>     
     </div>

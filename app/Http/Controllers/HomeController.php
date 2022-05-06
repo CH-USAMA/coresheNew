@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Document;
 use Auth;
 class HomeController extends Controller
 {
@@ -29,7 +30,8 @@ class HomeController extends Controller
 
         }else if(Auth::user()->role == 'Staff')
         {
-            return view('Staff.homeStaff');
+            $docs = Document::where('added_by',Auth::user()->id)->latest()->get();
+            return view('Staff.homeStaff',compact('docs'));
 
         }else{
             return view('Admin..homeAdmin');
